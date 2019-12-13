@@ -1,7 +1,9 @@
-package repo;
+package application.repo;
 
-import entity.Message;
+import application.entity.Message;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface MessageRepository extends CrudRepository<Message, Long> {
 }
