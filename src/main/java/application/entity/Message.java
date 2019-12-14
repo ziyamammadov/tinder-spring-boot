@@ -1,11 +1,14 @@
 package application.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
 @Entity
+@RequiredArgsConstructor
 @Table(name = "MESSAGES")
 public class Message {
     @Id
@@ -15,44 +18,4 @@ public class Message {
     private long receiver;
     private String message;
     private String date;
-
-    public long getMessage_id() {
-        return message_id;
-    }
-
-    public void setMessage_id(long message_id) {
-        this.message_id = message_id;
-    }
-
-    public long getSender() {
-        return sender;
-    }
-
-    public void setSender(long sender) {
-        this.sender = sender;
-    }
-
-    public long getReceiver() {
-        return receiver;
-    }
-
-    public void setReceiver(long receiver) {
-        this.receiver = receiver;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
 }
