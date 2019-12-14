@@ -24,7 +24,8 @@ public class UserController {
     }
 
     @PutMapping("/users")
-    public void put_one(User user) {
+    public void put_one(@RequestBody User user) {
+        System.out.println(user);
         service.put_one(user);
     }
 
