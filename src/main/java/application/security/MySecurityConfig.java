@@ -10,42 +10,27 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 @EnableWebSecurity
 public class MySecurityConfig extends WebSecurityConfigurerAdapter {
-    public MySecurityConfig(UsersInitial initial) {
-        log.info(":::: >> Populating initial users into Database...... >> ::::");
-        // actually that code must be presented
-        // in the user registration service
-        // we put it here only because we use H2 in-memory database
-        initial.populate();
-        log.info(":::: >> Populating initial users into Database. done >> ::::");
-    }
+//    public MySecurityConfig(UsersInitial initial) {
+//        log.info(":::: >> Populating initial users into Database...... >> ::::");
+//        // actually that code must be presented
+//        // in the user registration service
+//        // we put it here only because we use H2 in-memory database
+//        initial.populate();
+//        log.info(":::: >> Populating initial users into Database. done >> ::::");
+//    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
-        http.formLogin().permitAll().defaultSuccessUrl("/users")
-                .and()
-                .logout().permitAll()
-                .and()
-
+        http.csrf().disable();
+        http.formLogin().defaultSuccessUrl("/users/*").and()
                 .authorizeRequests()
-                .antMatchers("/like")
-                .hasAnyRole("USER")
-                .and()
-
-                .authorizeRequests()
-                .antMatchers("/message")
-                .hasAnyRole("USER")
-                .and()
-
-                .authorizeRequests()
-                .antMatchers("/users")
-                .hasAnyRole("USER")
-                .and()
-
-                .authorizeRequests()
-                .antMatchers("/likedlist")
+                .antMatchers("/likes/*")
                 .hasAnyRole("USER")
 
-                .and().antMatcher("*/*").authorizeRequests();
+                .antMatchers("/messages/*")
+                .hasAnyRole("USER")
+
+                .antMatchers("/users/*")
+                .hasAnyRole("USER");
     }
 }
