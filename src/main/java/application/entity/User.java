@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Set;
 
 @Data
@@ -15,21 +16,18 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String name;
-    private String surname;
     private String mail;
     private String password;
-    private String pic_url;
-    private String username;
+    private String pic;
     private String gender;
     private String country;
-    private int age;
-    private String phone;
+    private Date birthdate;
     private String roles;
 
     @Transient
     private final String ROLES_DELIMITER = ":";
 
-    public User(String username, String password, String... roles) {
+    public User(String username, String password, String... roles) {  //change username into mail
         this.username = username;
         this.password = password;
         setRoles(roles);
